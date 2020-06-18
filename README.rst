@@ -114,7 +114,7 @@ Some `purl` examples
     pkg:deb/debian/curl@7.50.3-1?arch=i386&distro=jessie
 
     pkg:docker/cassandra@sha256:244fd47e07d1004f0aed9c
-    pkg:docker/gcr.io/customer/dockerimage@sha256:244fd47e07d1004f0aed9c
+    pkg:docker/customer/dockerimage@sha256:244fd47e07d1004f0aed9c?repository_url=gcr.io
 
     pkg:gem/jruby-launcher@1.1.2?platform=java
     pkg:gem/ruby-advisory-db-check@0.12.4
@@ -506,6 +506,18 @@ candidate list further down.
         pkg:bitbucket/birkenfeld/pygments-main@244fd47e07d1014f0aed9c
 
 
+- `cargo` for Rust:
+
+  - The default repository is `https://crates.io/`
+  - The `name` is the repository name.
+  - The `version` is the package version.
+  - Examples::
+
+        pkg:cargo/rand@0.7.2
+        pkg:cargo/clap@2.33.0
+        pkg:cargo/structopt@0.3.11
+
+
 - `composer` for Composer PHP packages:
 
   - The default repository is `https://packagist.org`
@@ -525,7 +537,7 @@ candidate list further down.
   - The `namespace` is the "vendor" name such as "debian" or "ubuntu".
     It is not case sensitive and must be lowercased.
   - The `name` is not case sensitive and must be lowercased.
-  - The `version` is is the package version.
+  - The `version` is the package version.
   - `arch` is the `qualifiers` `key` for a package architecture
   - Examples::
 
@@ -543,7 +555,7 @@ candidate list further down.
 
         pkg:docker/cassandra@latest
         pkg:docker/smartentry/debian@dc437cc87d10
-        pkg:docker/gcr.io/customer/dockerimage@sha256%3A244fd47e07d10
+        pkg:docker/customer/dockerimage@sha256%3A244fd47e07d10?repository_url=gcr.io
 
 
 - `gem` for Rubygems:
@@ -602,6 +614,20 @@ candidate list further down.
         pkg:golang/github.com/gorilla/context@234fd47e07d1004f0aed9c
         pkg:golang/google.golang.org/genproto#googleapis/api/annotations
         pkg:golang/github.com/gorilla/context@234fd47e07d1004f0aed9c#api
+
+
+- `hex` for Hex packages
+
+  - The default repository is `https://repo.hex.pm`.
+  - The `namespace` is optional; it may be used to specify the organization for
+    private packages on hex.pm. It is not case sensitive and must be lowercased.
+  - The `name` is not case sensitive and must be lowercased.
+  - Examples::
+
+        pkg:hex/jason@1.1.2
+        pkg:hex/acme/foo@2.3.4
+        pkg:hex/phoenix_html@2.13.3#priv/static/phoenix_html.js
+        pkg:hex/bar@1.2.3?repository_url=https://myrepo.example.com
 
 
 - `maven` for Maven JARs and related artifacts
@@ -667,13 +693,16 @@ candidate list further down.
   - the `namespace` is the vendor such as fedora or opensuse
     It is not case sensitive and must be lowercased.
   - the `name` is the RPM name and is case sensitive.
-  - the `version` is the combined epoch (if not 0), version and release of an
-    RPM.
+  - the `version` is the combined version and release of an
+    RPM
+  - `epoch` (optional for RPMs) is a qualifier as it's not required for
+    unique identification, but when the epoch exists we strongly
+    encourage using it
   - `arch` is the `qualifiers` `key` for a package architecture
   - Examples::
 
         pkg:rpm/fedora/curl@7.50.3-1.fc25?arch=i386&distro=fedora-25
-        pkg:rpm/opensuse/curl@7.56.1-1.1.?arch=i386&distro=opensuse-tumbleweed
+        pkg:rpm/centerim@4.22.10-1.el6?arch=i686&epoch=1&distro=fedora-25
 
 
 Other candidate types to define:
@@ -687,9 +716,9 @@ Other candidate types to define:
 - `bower` for Bower JavaScript packages:
 - `brew` for Homebrew packages:
 - `buildroot` for Buildroot packages
-- `cargo` for Rust packages:
 - `carthage` for Cocoapods Cocoa packages:
 - `chef` for Chef packages:
+- `chocolatey` for Chocolatey packages
 - `clojars` for Clojure packages:
 - `cocoapods` for Cocoapods iOS packages:
 - `conan` for Conan C/C++ packages:
@@ -705,10 +734,11 @@ Other candidate types to define:
 - `eclipse` for Eclipse projects packages:
 - `gitea` for Gitea-based packages:
 - `gitlab` for Gitlab-based packages:
+- `gradle` for Gradle plugins
 - `guix` for Guix packages:
 - `hackage` for Haskell packages:
 - `haxe` for Haxe packages:
-- `hex` for Erlang and Elixir packages
+- `helm` for Kubernetes packages
 - `julia` for Julia packages:
 - `lua` for LuaRocks packages:
 - `melpa` for Emacs packages
@@ -729,6 +759,8 @@ Other candidate types to define:
 - `sourceforge` for Sourceforge-based packages:
 - `sublime` for Sublime packages:
 - `swift` for Swift packages:
+- `terraform` for Terraform modules
+- `vagrant` for Vagrant boxes
 - `vim` for Vim scripts packages:
 - `wordpress` for Wordpress packages:
 - `yocto` for Yocto recipe packages
@@ -794,6 +826,8 @@ Users, adopters and links
    The code lives in the 275 branch for now.
  - `OWASP Dependency-Track <https://www.owasp.org/index.php/OWASP_Dependency_Track_Project>`_: Software Composition Analysis (SCA) platform
  - `CycloneDX <https://github.com/CycloneDX>`_: A lightweight software bill-of-material (BOM) specification
+ - `OSS Index <https://ossindex.sonatype.com>`_: A free catalog of Open Source Components and scanning tools to help developers identify vulnerable components
+ - `Sonatype Nexus Lifecycle <https://www.sonatype.com/product-nexus-lifecycle>`_: Enterprise grade Open Source component management
 
 
 Tests
